@@ -13,13 +13,7 @@ export default async function handler(req, res) {
   const token = nanoid(32)
   const createdAt = Date.now()
   const expiresInMs = (Number(expires_in_days) || 30) * 24 * 60 * 60 * 1000
-  const keyObj = {
-    token,
-    note: note || '',
-    createdAt,
-    expiresAt: createdAt + expiresInMs,
-    active: true
-  }
+  const keyObj = { token, note: note || '', createdAt, expiresAt: createdAt + expiresInMs, active: true }
 
   db.data.keys.push(keyObj)
   await db.write()
